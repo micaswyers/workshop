@@ -1,0 +1,19 @@
+# needed for mybinder.org post docker build
+cd "${HOME}" && rm -rf "${HOME}"/work
+
+## folder strucutre needed for jupyter startups scripts
+mkdir -p "${HOME}"/.ipython/profile_default/startup/
+cp "${HOME}"/config/*.ipy "${HOME}"/.ipython/profile_default/startup/
+
+## move all config and setup files not needed for presentations
+
+mv "${HOME}"/binder "${HOME}"/config
+
+mv "${HOME}"/Dockerfile "${HOME}"/readme.md "${HOME}"/config
+
+cd "${HOME}" && rm -rf "${HOME}"/binder
+
+# confirm that notebook extenstions are installed for mybinder use:
+conda install -c conda-forge jupyter_nbextensions_configurator
+conda install -c conda-forge jupyter_contrib_nbextensions
+jupyter nbextension enable freeze/main
